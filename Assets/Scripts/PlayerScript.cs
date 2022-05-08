@@ -26,6 +26,7 @@ public class PlayerScript : MonoBehaviour
     {
         rb.velocity = new Vector2(0, 0);
         rb.AddForce(Vector2.up * jump_height, ForceMode2D.Impulse);
+        print("jumping");
 
         animator.SetTrigger("FlapTrigger");
     }
@@ -48,6 +49,8 @@ public class PlayerScript : MonoBehaviour
 
     private void Death()
     {
+        animator.SetTrigger("DeathTrigger");
         controls.Disable();
+        
     }
 }

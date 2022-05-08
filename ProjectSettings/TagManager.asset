@@ -7,6 +7,7 @@ TagManager:
   - Pipe
   - Upper_Midpoint_Boundary
   - Lower_Midpoint_Boundary
+  - DestroyTrigger
   layers:
   - Default
   - TransparentFX

@@ -20,4 +20,16 @@ public class PipeScript : MonoBehaviour
     {
         return speed;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        //For performance
+        if (collision.tag == "DestroyTrigger")
+        {
+            print("pipe collided with destroytrigger");
+            Destroy(gameObject);
+        }
+    }
+
 }
