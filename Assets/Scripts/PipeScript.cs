@@ -27,7 +27,6 @@ public class PipeScript : MonoBehaviour
         //For performance
         if (collision.tag == "DestroyTrigger")
         {
-            print("pipe collided with destroytrigger");
             Destroy(gameObject);
         }
     }

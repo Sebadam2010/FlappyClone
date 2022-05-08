@@ -8,6 +8,10 @@ TagManager:
   - Upper_Midpoint_Boundary
   - Lower_Midpoint_Boundary
   - DestroyTrigger
+  - DestroyTriggerPlayer
+  - PipeScoreTrigger
+  - ScoreManager
+  - Score
   layers:
   - Default
   - TransparentFX

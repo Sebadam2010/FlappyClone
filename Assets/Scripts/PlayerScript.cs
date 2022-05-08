@@ -7,26 +7,34 @@ using UnityEngine.InputSystem;
 public class PlayerScript : MonoBehaviour
 {
     //[Range(0, 10)]
-    public float jump_height = 4;
+    public float jump_height = 2.75f;
+
+    private GameObject score_manager;
+    private ScoreManager score_manager_script;
 
     private Animator animator;
     private Rigidbody2D rb;
 
     private PlayerControls controls;
 
-    private void Start()
+    private void Awake()
     {
+        score_manager = GameObject.FindGameObjectWithTag("ScoreManager");
+        score_manager_script = score_manager.GetComponent<ScoreManager>();
         animator = gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         initControls();
+    }
+    private void Start()
+    {
+        
     }
 
     private void Jump(InputAction.CallbackContext obj)
     {
         rb.velocity = new Vector2(0, 0);
         rb.AddForce(Vector2.up * jump_height, ForceMode2D.Impulse);
-        print("jumping");
 
         animator.SetTrigger("FlapTrigger");
     }
@@ -41,9 +49,14 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Pipe")
+        if (collision.tag == "Pipe" || collision.tag == "DestroyTriggerPlayer")
         {
             Death();
+        }
+        else if(collision.tag == "PipeScoreTrigger")
+        {
+            print("Colliding with pipescoretrigger");
+            score_manager_script.setScore(score_manager_script.getScore() + 1);
         }
     }
 
