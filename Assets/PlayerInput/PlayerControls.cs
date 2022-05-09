@@ -88,7 +88,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4835582a-cc5a-498c-ad7c-cdb6c923da11"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
