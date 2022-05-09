@@ -17,12 +17,18 @@ public class PlayerScript : MonoBehaviour
 
     private PlayerControls controls;
 
+    private GameObject post_game_ui;
+    private UIScript post_game_ui_script;
+
     private void Awake()
     {
         score_manager = GameObject.FindGameObjectWithTag("ScoreManager");
         score_manager_script = score_manager.GetComponent<ScoreManager>();
-        animator = gameObject.GetComponent<Animator>();
+        animator = transform.parent.gameObject.GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        post_game_ui = GameObject.FindGameObjectWithTag("Canvas");
+        post_game_ui_script = post_game_ui.GetComponent<UIScript>();
 
         initControls();
     }
@@ -64,6 +70,8 @@ public class PlayerScript : MonoBehaviour
     {
         animator.SetTrigger("DeathTrigger");
         controls.Disable();
-        
+        post_game_ui_script.PostGameMenu();
+
+
     }
 }

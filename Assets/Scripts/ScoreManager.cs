@@ -15,8 +15,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private int score = 0;
 
-    private GameObject score_go;
-    private TextMeshProUGUI score_text;
+    public GameObject score_go;
+    public TextMeshProUGUI score_text;
 
     private void Awake()
     {
@@ -31,14 +31,15 @@ public class ScoreManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        score_go = GameObject.FindWithTag("Score");
-        score_text = score_go.GetComponent<TextMeshProUGUI>();
 
-        
+        initScoreManager();
+
+
     }
 
     private void Start()
     {
+        
     }
 
     public void setScore(int score_)
@@ -67,6 +68,15 @@ public class ScoreManager : MonoBehaviour
         return coins;
     }
 
+    //Instead of this, should consider removing "DontDestroyOnLoad" and just loading the coins from the dat file instead.
+    //restartScore just a temporary fix
+    public void initScoreManager()
+    {
+        score_go = GameObject.FindWithTag("Score");
+        score_text = score_go.GetComponent<TextMeshProUGUI>();
+
+        score = 0;
+    }
     public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();

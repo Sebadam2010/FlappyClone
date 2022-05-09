@@ -12,6 +12,8 @@ TagManager:
   - PipeScoreTrigger
   - ScoreManager
   - Score
+  - PostGameMenu
+  - Canvas
   layers:
   - Default
   - TransparentFX
