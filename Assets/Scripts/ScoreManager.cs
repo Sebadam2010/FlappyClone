@@ -72,6 +72,8 @@ public class ScoreManager : MonoBehaviour
     //restartScore just a temporary fix
     public void initScoreManager()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
         score_go = GameObject.FindWithTag("Score");
         score_text = score_go.GetComponent<TextMeshProUGUI>();
 
