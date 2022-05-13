@@ -9,6 +9,11 @@ public class PlayerScript : MonoBehaviour
     //[Range(0, 10)]
     public float jump_height = 2.75f;
 
+    private float degrees_of_rotation = 5f;
+    private Vector3 v3ToTop = new Vector3(0, 0, 35);
+    private Vector3 v3ToBottom = new Vector3(0, 0, -35);
+    private Vector3 v3Current = new Vector3(0, 0, 0);
+
     private GameObject score_manager;
     private ScoreManager score_manager_script;
 
@@ -34,9 +39,41 @@ public class PlayerScript : MonoBehaviour
     }
     private void Start()
     {
-        
+        v3Current = transform.eulerAngles;
     }
 
+    private void Update()
+    {
+        if(rb.velocity.y < 0 )
+        {
+            v3Current = new Vector3(
+            Mathf.LerpAngle(v3Current.x, v3ToBottom.x, 0.085f),
+            Mathf.LerpAngle(v3Current.y, v3ToBottom.y, 0.085f),
+            Mathf.LerpAngle(v3Current.z, v3ToBottom.z, 0.085f));
+            transform.eulerAngles = v3Current;
+
+        } 
+        else
+        {
+            v3Current = new Vector3(
+            Mathf.LerpAngle(v3Current.x, v3ToTop.x, 0.085f),
+            Mathf.LerpAngle(v3Current.y, v3ToTop.y, 0.085f),
+            Mathf.LerpAngle(v3Current.z, v3ToTop.z, 0.085f));
+            transform.eulerAngles = v3Current;
+        }
+
+        
+
+        
+
+
+        //transform.rotation = Quaternion.Euler(Vector3.forward * -degrees_of_rotation);
+    }
+
+    private void FixedUpdate()
+    {
+        //transform.Rotate(0, 0, -50 * Time.deltaTime);
+    }
     private void Jump(InputAction.CallbackContext obj)
     {
         rb.velocity = new Vector2(0, 0);
@@ -61,7 +98,7 @@ public class PlayerScript : MonoBehaviour
         }
         else if(collision.tag == "PipeScoreTrigger")
         {
-            print("Colliding with pipescoretrigger");
+
             score_manager_script.setScore(score_manager_script.getScore() + 1);
         }
     }
