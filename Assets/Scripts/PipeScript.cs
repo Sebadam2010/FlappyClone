@@ -8,6 +8,11 @@ public class PipeScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+    }
+
+    private void Update()
+    {
         transform.position -= transform.right * speed * Time.deltaTime;
     }
 

@@ -13,6 +13,13 @@ public class UIScript : MonoBehaviour
 
     private void Awake()
     {
+        
+
+       
+    }
+
+    private void Start()
+    {
         post_game_menu = GameObject.FindWithTag("PostGameMenu");
         post_game_menu.SetActive(false);
 
@@ -33,5 +40,15 @@ public class UIScript : MonoBehaviour
         
         SceneManager.LoadScene("GameScene");
         
+    }
+
+    public void switchScene()
+    {
+
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+            SceneManager.LoadScene("GameScene");
+        else
+            SceneManager.LoadScene("MainMenu");
+
     }
 }

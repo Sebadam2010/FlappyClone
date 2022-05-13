@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class ScoreManager : MonoBehaviour
@@ -32,14 +33,14 @@ public class ScoreManager : MonoBehaviour
         }
 
 
-        initScoreManager();
+        
 
 
     }
 
     private void Start()
     {
-        
+        initScoreManager();
     }
 
     public void setScore(int score_)
@@ -72,12 +73,26 @@ public class ScoreManager : MonoBehaviour
     //restartScore just a temporary fix
     public void initScoreManager()
     {
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
-        score_go = GameObject.FindWithTag("Score");
-        score_text = score_go.GetComponent<TextMeshProUGUI>();
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 60;
+            score_go = GameObject.FindWithTag("Score");
+            score_text = score_go.GetComponent<TextMeshProUGUI>();
 
-        score = 0;
+            score = 0;
+        }
+        
+    }
+
+    public void switchScene()
+    {
+
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+            SceneManager.LoadScene("GameScene");
+        else
+            SceneManager.LoadScene("MainMenu");
+
     }
     public void Save()
     {
