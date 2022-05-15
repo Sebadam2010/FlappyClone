@@ -16,6 +16,7 @@ TagManager:
   - Canvas
   - MainMenuCanvas
   - OptionsCanvas
+  - Graphy
   layers:
   - Default
   - TransparentFX

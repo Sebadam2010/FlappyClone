@@ -14,11 +14,11 @@ public class UIScript : MonoBehaviour
     private GameObject score_manager;
     private ScoreManager score_manager_script;
 
+    private GameObject graphy_go;
+
     private void Awake()
     {
-
-
-
+        
     }
 
     private void Start()
@@ -33,6 +33,7 @@ public class UIScript : MonoBehaviour
             post_game_menu.SetActive(false);
         }
 
+        graphy_go = GraphyScript.graphy_script.gameObject;
 
         score_manager = GameObject.FindWithTag("ScoreManager");
         score_manager_script = score_manager.GetComponent<ScoreManager>();
@@ -78,4 +79,17 @@ public class UIScript : MonoBehaviour
             options_menu.SetActive(false);
         }
     }
+
+    public void toggleFPS()
+    {
+        if (graphy_go.activeSelf)
+        {
+            graphy_go.SetActive(false);
+        }
+        else
+        {
+            graphy_go.SetActive(true);
+        }
+    }
+
 }
