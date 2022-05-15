@@ -62,19 +62,8 @@
                 },
                 {
                     "name": "",
-                    "id": "e05c24f2-5506-48a0-b7d7-3fafb36651af",
+                    "id": "236f8014-2755-40c5-a380-39b63bd7432a",
                     "path": "<Touchscreen>/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touch",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4835582a-cc5a-498c-ad7c-cdb6c923da11",
-                    "path": "<Touchscreen>/primaryTouch/tap",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch",
