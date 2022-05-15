@@ -9,7 +9,6 @@ public class PlayerScript : MonoBehaviour
     //[Range(0, 10)]
     public float jump_height = 2.75f;
 
-    private float degrees_of_rotation = 5f;
     private Vector3 v3ToTop = new Vector3(0, 0, 35);
     private Vector3 v3ToBottom = new Vector3(0, 0, -35);
     private Vector3 v3Current = new Vector3(0, 0, 0);
@@ -17,16 +16,27 @@ public class PlayerScript : MonoBehaviour
     private GameObject score_manager;
     private ScoreManager score_manager_script;
 
+    private GameObject parent;
     private Animator animator;
     private Rigidbody2D rb;
+
+    private float player_width;
+    private float player_height;
 
     private PlayerControls controls;
 
     private GameObject post_game_ui;
     private UIScript post_game_ui_script;
 
+    //Camera Settings
+    private Camera camera;
+
+
+
     private void Awake()
     {
+        parent = transform.parent.gameObject;
+
         score_manager = GameObject.FindGameObjectWithTag("ScoreManager");
         score_manager_script = score_manager.GetComponent<ScoreManager>();
         animator = transform.parent.gameObject.GetComponent<Animator>();
@@ -35,11 +45,30 @@ public class PlayerScript : MonoBehaviour
         post_game_ui = GameObject.FindGameObjectWithTag("Canvas");
         post_game_ui_script = post_game_ui.GetComponent<UIScript>();
 
+        player_height = GetComponent<SpriteRenderer>().bounds.size.y;
+        player_width = GetComponent<SpriteRenderer>().bounds.size.x;
+
+        camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+
+
+
         initControls();
     }
     private void Start()
     {
+
+
         v3Current = transform.eulerAngles;
+
+        Vector3 world_point_top_left = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height/2, 5));
+         world_point_top_left.x += player_width / 2;
+
+        parent.SetActive(false);
+        parent.transform.position = world_point_top_left;
+        parent.SetActive(true); // not sure why i have to set active then inactive for position to change
+
+        
+        
     }
 
     private void Update()
@@ -61,25 +90,12 @@ public class PlayerScript : MonoBehaviour
             Mathf.LerpAngle(v3Current.z, v3ToTop.z, 0.085f));
             transform.eulerAngles = v3Current;
         }
-
-        
-
-        
-
-
-        //transform.rotation = Quaternion.Euler(Vector3.forward * -degrees_of_rotation);
     }
 
-    private void FixedUpdate()
-    {
-        //transform.Rotate(0, 0, -50 * Time.deltaTime);
-    }
     private void Jump(InputAction.CallbackContext obj)
     {
         rb.velocity = new Vector2(0, 0);
         rb.AddForce(Vector2.up * jump_height, ForceMode2D.Impulse);
-
-        animator.SetTrigger("FlapTrigger");
     }
 
     private void initControls()
