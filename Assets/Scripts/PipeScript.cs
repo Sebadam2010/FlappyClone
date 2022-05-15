@@ -6,6 +6,13 @@ public class PipeScript : MonoBehaviour
 {
     public float speed = 0.5f;
 
+    private AudioSource audio_source;
+
+    private void Start()
+    {
+        audio_source = GetComponent<AudioSource>();
+    }
+
     private void FixedUpdate()
     {
 
@@ -30,7 +37,12 @@ public class PipeScript : MonoBehaviour
     {
 
         //For performance
-        if (collision.tag == "DestroyTrigger")
+        
+         if (collision.tag == "Player")
+        {
+            audio_source.Play();
+        }
+        else if (collision.tag == "DestroyTrigger")
         {
             Destroy(gameObject);
         }

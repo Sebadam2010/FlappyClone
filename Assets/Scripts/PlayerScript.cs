@@ -33,6 +33,9 @@ public class PlayerScript : MonoBehaviour
     //Camera Settings
     private Camera camera;
 
+    //Audio
+    private AudioSource audio_source;
+
 
 
     private void Awake()
@@ -51,6 +54,8 @@ public class PlayerScript : MonoBehaviour
         player_width = GetComponent<SpriteRenderer>().bounds.size.x;
 
         camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+
+        audio_source = GetComponent<AudioSource>();
 
 
 
@@ -99,6 +104,7 @@ public class PlayerScript : MonoBehaviour
         if (jump)
         {
             rb.velocity = new Vector2(0, jump_height);
+            audio_source.PlayOneShot(audio_source.clip, 0.2f);
             //rb.AddForce(Vector2.up * jump_height, ForceMode2D.Impulse);
             jump = false;
         }
