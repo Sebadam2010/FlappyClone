@@ -14,6 +14,8 @@ TagManager:
   - Score
   - PostGameMenu
   - Canvas
+  - MainMenuCanvas
+  - OptionsCanvas
   layers:
   - Default
   - TransparentFX
