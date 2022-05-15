@@ -181,6 +181,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8077950682389665397, guid: a70d6817d7ae0294aad19a232344a116, type: 3}
+      propertyPath: jump_height
+      value: 5.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8077950682389665398, guid: a70d6817d7ae0294aad19a232344a116, type: 3}
       propertyPath: m_RootOrder
       value: 0

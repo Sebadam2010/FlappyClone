@@ -7,7 +7,9 @@ using UnityEngine.InputSystem;
 public class PlayerScript : MonoBehaviour
 {
     //[Range(0, 10)]
-    public float jump_height = 2.75f;
+    //public float jump_height = 2.75f;
+    public float jump_height = 5.5f;
+    private bool jump = false;
 
     private Vector3 v3ToTop = new Vector3(0, 0, 35);
     private Vector3 v3ToBottom = new Vector3(0, 0, -35);
@@ -92,10 +94,19 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (jump)
+        {
+            rb.velocity = new Vector2(0, jump_height);
+            //rb.AddForce(Vector2.up * jump_height, ForceMode2D.Impulse);
+            jump = false;
+        }
+    }
+
     private void Jump(InputAction.CallbackContext obj)
     {
-        rb.velocity = new Vector2(0, 0);
-        rb.AddForce(Vector2.up * jump_height, ForceMode2D.Impulse);
+        jump = true;
     }
 
     private void initControls()
