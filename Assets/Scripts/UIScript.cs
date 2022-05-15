@@ -16,6 +16,12 @@ public class UIScript : MonoBehaviour
 
     private GameObject graphy_go;
 
+    //Tutorial
+    public static GameObject tutorial_image;
+
+    //Player
+    public PlayerScript player_script;
+
     private void Awake()
     {
         
@@ -37,10 +43,17 @@ public class UIScript : MonoBehaviour
             }
             
         }
-        else
+        else //in game scene
         {
             post_game_menu = GameObject.FindWithTag("PostGameMenu");
             post_game_menu.SetActive(false);
+
+
+            player_script = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
+            
+            tutorial_image = GameObject.FindWithTag("TutorialImage");
+            tutorial_image.SetActive(true);
+            
         }
 
         
@@ -102,6 +115,11 @@ public class UIScript : MonoBehaviour
             graphy_go.SetActive(true);
             GraphyScript.graphy_script.show_active = true;
         }
+    }
+
+    public void toggleTutorialImage(bool active_)
+    {
+        tutorial_image.SetActive(active_);
     }
 
 }

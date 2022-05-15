@@ -25,7 +25,7 @@ public class SpawnerScript : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("spawnPipe");
+        //StartCoroutine("spawnPipe");
     }
 
     private void FixedUpdate()
