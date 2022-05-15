@@ -17,6 +17,8 @@ TagManager:
   - MainMenuCanvas
   - OptionsCanvas
   - Graphy
+  - TutorialImage
+  - Spawner
   layers:
   - Default
   - TransparentFX

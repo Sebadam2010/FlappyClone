@@ -42,7 +42,7 @@ public class PipeScript : MonoBehaviour
         {
             audio_source.Play();
         }
-        else if (collision.tag == "DestroyTrigger")
+        else if (collision.tag == "DestroyTrigger" || collision.tag == "DestroyTriggerTutorial")
         {
             Destroy(gameObject);
         }

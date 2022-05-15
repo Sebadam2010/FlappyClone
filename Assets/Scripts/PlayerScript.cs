@@ -36,6 +36,15 @@ public class PlayerScript : MonoBehaviour
     //Audio
     private AudioSource audio_source;
 
+    //Tutorial 
+    public bool tutorial_ongoing = true;
+
+    //UI
+    private UIScript ui_script;
+
+    //Pipe Spawner
+    private SpawnerScript spawner_script;
+
 
 
     private void Awake()
@@ -72,37 +81,62 @@ public class PlayerScript : MonoBehaviour
 
         parent.SetActive(false);
         parent.transform.position = world_point_top_left;
-        parent.SetActive(true); // not sure why i have to set active then inactive for position to change
+        parent.SetActive(true); // issue with rb causes me to have to do this (inactive then active)
 
-        
-        
+        ui_script = GameObject.FindWithTag("Canvas").GetComponent<UIScript>();
+        spawner_script = GameObject.FindWithTag("Spawner").GetComponent<SpawnerScript>();
+
+
     }
 
     private void Update()
     {
-        if(rb.velocity.y < 0 )
-        {
-            v3Current = new Vector3(
-            Mathf.LerpAngle(v3Current.x, v3ToBottom.x, 0.085f),
-            Mathf.LerpAngle(v3Current.y, v3ToBottom.y, 0.085f),
-            Mathf.LerpAngle(v3Current.z, v3ToBottom.z, 0.085f));
-            transform.eulerAngles = v3Current;
+        
+            
 
-        } 
-        else
-        {
-            v3Current = new Vector3(
-            Mathf.LerpAngle(v3Current.x, v3ToTop.x, 0.085f),
-            Mathf.LerpAngle(v3Current.y, v3ToTop.y, 0.085f),
-            Mathf.LerpAngle(v3Current.z, v3ToTop.z, 0.085f));
-            transform.eulerAngles = v3Current;
-        }
+            if (rb.velocity.y < 0)
+            {
+                v3Current = new Vector3(
+                Mathf.LerpAngle(v3Current.x, v3ToBottom.x, 0.085f),
+                Mathf.LerpAngle(v3Current.y, v3ToBottom.y, 0.085f),
+                Mathf.LerpAngle(v3Current.z, v3ToBottom.z, 0.085f));
+                transform.eulerAngles = v3Current;
+
+            }
+            else if (rb.velocity.y > 0)
+            {
+                v3Current = new Vector3(
+                Mathf.LerpAngle(v3Current.x, v3ToTop.x, 0.085f),
+                Mathf.LerpAngle(v3Current.y, v3ToTop.y, 0.085f),
+                Mathf.LerpAngle(v3Current.z, v3ToTop.z, 0.085f));
+                transform.eulerAngles = v3Current;
+            }
+        
+        
+
+        
     }
 
     private void FixedUpdate()
     {
+
+        if (tutorial_ongoing)
+        {
+            rb.velocity = new Vector2(0, 0);
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        }
+            
         if (jump)
         {
+            if (tutorial_ongoing)
+            {
+                ui_script.toggleTutorialImage(false);
+                rb.constraints = RigidbodyConstraints2D.None;
+                spawner_script.StartCoroutine("spawnPipe");
+                rb.velocity = new Vector2(0, jump_height);
+                tutorial_ongoing = false;
+            }
+
             rb.velocity = new Vector2(0, jump_height);
             audio_source.PlayOneShot(audio_source.clip, 0.2f);
             //rb.AddForce(Vector2.up * jump_height, ForceMode2D.Impulse);
