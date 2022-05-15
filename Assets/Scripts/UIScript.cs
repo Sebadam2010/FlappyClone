@@ -23,8 +23,18 @@ public class UIScript : MonoBehaviour
 
     private void Start()
     {
+        graphy_go = GraphyScript.graphy_script.gameObject;
+
         if ((SceneManager.GetActiveScene().name == "MainMenu"))
         {
+            if(GraphyScript.graphy_script.show_active)
+            {
+                graphy_go.SetActive(true);
+            }
+            else
+            {
+                graphy_go.SetActive(false);
+            }
             
         }
         else
@@ -33,7 +43,7 @@ public class UIScript : MonoBehaviour
             post_game_menu.SetActive(false);
         }
 
-        graphy_go = GraphyScript.graphy_script.gameObject;
+        
 
         score_manager = GameObject.FindWithTag("ScoreManager");
         score_manager_script = score_manager.GetComponent<ScoreManager>();
@@ -85,10 +95,12 @@ public class UIScript : MonoBehaviour
         if (graphy_go.activeSelf)
         {
             graphy_go.SetActive(false);
+            GraphyScript.graphy_script.show_active = false;
         }
         else
         {
             graphy_go.SetActive(true);
+            GraphyScript.graphy_script.show_active = true;
         }
     }
 
